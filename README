@@ -1,0 +1,17 @@
+README
+To create message call :http://localhost:8080/message-api/createMessages
+
+json data 
+{
+"url":"http://vinayvishwkarma.com",
+"title":"f-secure-assignment",
+"content":"assigment to create message board app using REST web service in Spring-Boot" ,
+"sender":"vinay vishwkarma"
+
+}
+
+
+
+version 2 :http://localhost:8080/message-api/v2/listMessages?version=v2&format=json
+
+version 1 url:http://localhost:8080/message-api/v1/listMessages?version=v1
