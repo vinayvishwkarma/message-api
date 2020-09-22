@@ -2,16 +2,21 @@ package com.fsecure.messageapi.controller;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyString;
 
 import org.junit.Test;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
-
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBeans;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,6 +25,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,21 +50,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fsecure.messageapi.dto.FirstVersionMessageDTO;
 import com.fsecure.messageapi.dto.SecoundVersionMessageDTO;
+import com.fsecure.messageapi.service.ListMessagesService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(ListMessagesController.class)
 public class ListMessagesControllerTest {
 	
-	
+	@InjectMocks
+	private ListMessagesController  listMessagesController;
 	
 	
 	@MockBean
-	private ListMessagesController listMessagesController;
+	private ListMessagesService listMessagesService;
+	
 	
 	
 	@Autowired
 	MockMvc mockMvc;
+	
+	@BeforeEach
+	void setUp() throws Exception{
+		
+		MockitoAnnotations.initMocks(this);
+
+	}
 	
 	@Test
 	public void test()  throws Exception{
@@ -79,13 +95,7 @@ public class ListMessagesControllerTest {
 	        
 	 	   int status = result.getResponse().getStatus();
 	 	   assertEquals(201, status);
-		      
-		    /*.andExpect(status().isOk())
-		      
-		      .andExpect(jsonPath("$", hasSize(1)))
-		      .andExpect(jsonPath("$[0].title", is(message.getTitle())));*/
-		    
-		    
+		
 		   
 	}
 	
@@ -110,9 +120,7 @@ public class ListMessagesControllerTest {
 		    int status = result.getResponse().getStatus();
 		 	   assertEquals(201, status);
 		    
-		      /*.andExpect(status().isOk())
-		      .andExpect(jsonPath("$", hasSize(1)))
-		      .andExpect(jsonPath("$[0].title", is(message.getTitle())));*/
+		      
 		    
 		    
 		   
